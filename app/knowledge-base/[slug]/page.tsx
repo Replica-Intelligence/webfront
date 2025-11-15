@@ -181,10 +181,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
         {/* Article Content */}
         <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex gap-8">
-              {/* Main Content */}
-              <article className="flex-1 min-w-0 max-w-4xl">
+          <div className="max-w-4xl mx-auto">
+            {/* Main Content */}
+            <article>
                 {/* Article Header */}
                 <header className="mb-8 sm:mb-12">
                   {/* Series info */}
@@ -307,11 +306,10 @@ print(f"Shape: {embeddings.shape}")`}
 
                 {/* Feedback */}
                 <ArticleFeedback />
-              </article>
+            </article>
 
-              {/* Table of Contents - Right Sidebar */}
-              {/* <TableOfContents sections={tocSections} /> */}
-            </div>
+            {/* Table of Contents - Right Sidebar */}
+            {/* <TableOfContents sections={tocSections} /> */}
           </div>
         </div>
       </div>
