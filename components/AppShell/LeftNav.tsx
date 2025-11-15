@@ -1,10 +1,10 @@
 'use client';
-
+import type React from "react";
 import { useState } from 'react';
 import Link from 'next/link';
 
 interface NavSection {
-  icon: JSX.Element;
+  icon: React.ReactNode;
   label: string;
   href: string;
   active?: boolean;
