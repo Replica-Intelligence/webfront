@@ -73,7 +73,7 @@ export default function LeftNav() {
 
   return (
     <aside
-      className={`fixed left-0 top-16 bottom-0 bg-slate-950 border-r border-slate-800 transition-all duration-300 z-40 ${
+      className={`fixed left-0 top-16 bottom-0 bg-gray-900 border-r border-gray-700/50 transition-all duration-300 z-40 ${
         collapsed ? 'w-16' : 'w-64'
       }`}
     >
@@ -81,7 +81,7 @@ export default function LeftNav() {
         {/* Collapse button */}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="m-3 p-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded-md transition-colors self-end"
+          className="m-3 p-2 text-gray-400 hover:text-gray-200 hover:bg-gray-700/50 rounded-md transition-colors self-end"
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           <svg
@@ -103,7 +103,7 @@ export default function LeftNav() {
               className={`flex items-center gap-3 px-3 py-2.5 rounded-md transition-colors ${
                 section.active
                   ? 'bg-cyan-400/10 text-cyan-400'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                  : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
               }`}
               title={collapsed ? section.label : undefined}
             >

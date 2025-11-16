@@ -12,14 +12,33 @@ export async function POST(request: Request) {
 
   try {
     const articleData = await request.json();
+    const { relatedArticleIds, ...restArticleData } = articleData;
 
     // Add server timestamp
     const article = {
-      ...articleData,
+      ...restArticleData,
       createdAt: new Date().toISOString(),
     };
 
     const docRef = await adminDb.collection('articles').add(article);
+
+    // Create related articles relationships if provided
+    if (relatedArticleIds && Array.isArray(relatedArticleIds) && relatedArticleIds.length > 0) {
+      const batch = adminDb.batch();
+
+      for (const relatedId of relatedArticleIds) {
+        if (relatedId && relatedId.trim()) {
+          const relatedDocRef = adminDb.collection('relatedArticles').doc();
+          batch.set(relatedDocRef, {
+            sourceArticleId: docRef.id,
+            relatedArticleId: relatedId.trim(),
+            createdAt: new Date().toISOString(),
+          });
+        }
+      }
+
+      await batch.commit();
+    }
 
     return NextResponse.json({
       success: true,

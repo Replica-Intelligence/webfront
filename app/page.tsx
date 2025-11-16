@@ -18,7 +18,7 @@ export default function Home() {
 
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
         <div className="w-12 h-12 border-4 border-slate-700 border-t-cyan-400 rounded-full animate-spin"></div>
       </div>
     );
@@ -27,13 +27,6 @@ export default function Home() {
   return (
     <AppShell showLeftNav={false}>
       <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden relative">
-        <button
-          onClick={handleKnowledgeBase}
-          className="absolute top-8 right-8 text-slate-300 text-lg hover:text-white transition-colors z-10"
-        >
-          Knowledge Base
-        </button>
-
         <div className="relative px-4">
           <h1
             className="text-7xl sm:text-8xl md:text-9xl lg:text-[12rem] xl:text-[16rem] font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent pulse-text select-none cursor-pointer"
@@ -41,7 +34,7 @@ export default function Home() {
           >
             RI
           </h1>
-          <p className="text-center mt-6 text-slate-400 text-base sm:text-lg md:text-xl">
+          <p className="text-center mt-6 text-gray-400 text-base sm:text-lg md:text-xl">
             Replica Intelligence
           </p>
           <div className="sparks-container">

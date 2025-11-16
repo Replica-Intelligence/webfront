@@ -66,7 +66,7 @@ export default async function KnowledgeBase() {
           <div className="max-w-7xl mx-auto">
             {/* Articles Grid - Centered */}
             {articles.length === 0 ? (
-              <div className="text-center text-slate-400 py-12 sm:py-16">
+              <div className="text-center text-gray-400 py-12 sm:py-16">
                 <svg
                   className="w-16 h-16 mx-auto mb-4 text-slate-600"
                   fill="none"
@@ -92,7 +92,7 @@ export default async function KnowledgeBase() {
 
             {/* Pagination - commented out for now */}
             {/* <div className="mt-8 flex justify-center">
-              <button className="px-4 sm:px-6 py-2 sm:py-3 bg-slate-900 border border-slate-700 text-slate-300 rounded-lg hover:bg-slate-800 hover:border-cyan-400/50 transition-colors text-sm sm:text-base">
+              <button className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-800/50 border border-gray-700 text-gray-300 rounded-lg hover:bg-gray-700/50 hover:border-cyan-400/50 transition-colors text-sm sm:text-base">
                 Load more articles
               </button>
             </div> */}

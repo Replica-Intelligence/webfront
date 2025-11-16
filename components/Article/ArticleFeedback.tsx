@@ -27,7 +27,7 @@ export default function ArticleFeedback() {
   }
 
   return (
-    <div className="my-8 sm:my-12 p-4 sm:p-6 bg-slate-900/50 border border-slate-800 rounded-lg">
+    <div className="my-8 sm:my-12 p-4 sm:p-6 bg-gray-800/50 border border-slate-800 rounded-lg">
       <h3 className="text-lg sm:text-xl font-semibold text-white mb-4">
         Was this article helpful?
       </h3>
@@ -38,7 +38,7 @@ export default function ArticleFeedback() {
           className={`flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-lg border transition-colors ${
             helpful === true
               ? 'bg-green-400/10 border-green-400 text-green-400'
-              : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-600'
+              : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-cyan-500/50'
           }`}
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -56,7 +56,7 @@ export default function ArticleFeedback() {
           className={`flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-lg border transition-colors ${
             helpful === false
               ? 'bg-red-400/10 border-red-400 text-red-400'
-              : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-600'
+              : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:border-cyan-500/50'
           }`}
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -77,7 +77,7 @@ export default function ArticleFeedback() {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder="Any additional comments? (optional)"
-            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 text-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400/50 resize-none text-sm sm:text-base"
+            className="w-full px-4 py-3 bg-slate-950 border border-gray-700 text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400/50 resize-none text-sm sm:text-base"
             rows={3}
           />
           <button

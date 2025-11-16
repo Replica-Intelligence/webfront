@@ -96,12 +96,13 @@ const SAMPLE_ARTICLES = [
 ];
 
 export default function CreateArticlePage() {
-  const { data: session, status } = useSession();
+  const { data: session, status} = useSession();
   const router = useRouter();
   const [formData, setFormData] = useState(SAMPLE_ARTICLES[0]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState<'success' | 'error' | 'info'>('info');
+  const [relatedArticleIds, setRelatedArticleIds] = useState<string>('');
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -128,6 +129,7 @@ export default function CreateArticlePage() {
         body: JSON.stringify({
           ...formData,
           date: new Date().toISOString().split('T')[0],
+          relatedArticleIds: relatedArticleIds.trim() ? relatedArticleIds.split(',').map(id => id.trim()) : [],
         }),
       });
 
@@ -411,6 +413,21 @@ export default function CreateArticlePage() {
                 className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
               />
             </div>
+          </div>
+
+          {/* Related Articles */}
+          <div>
+            <label className="block text-sm font-medium mb-2">Related Article IDs (comma-separated)</label>
+            <input
+              type="text"
+              value={relatedArticleIds}
+              onChange={(e) => setRelatedArticleIds(e.target.value)}
+              placeholder="e.g., article-id-1, article-id-2, article-id-3"
+              className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
+            />
+            <p className="mt-2 text-xs text-slate-400">
+              Enter Firestore document IDs of related articles, separated by commas. Leave empty if no related articles.
+            </p>
           </div>
 
           {/* Submit */}
