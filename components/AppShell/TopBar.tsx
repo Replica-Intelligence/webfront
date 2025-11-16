@@ -1,6 +1,6 @@
 'use client';
 
-import { useSession, signOut } from 'next-auth/react';
+import { useSession, signOut, signIn } from 'next-auth/react';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -9,7 +9,7 @@ export default function TopBar() {
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur supports-[backdrop-filter]:bg-slate-950/80">
+    <header className="sticky top-0 z-50 border-b border-gray-700/50 bg-gray-900/95 backdrop-blur supports-[backdrop-filter]:bg-gray-900/80">
       <div className="flex h-16 items-center justify-between px-6">
         {/* Left: Logo and Workspace */}
         <div className="flex items-center gap-6">
@@ -19,11 +19,11 @@ export default function TopBar() {
             </div>
           </Link>
           {/* Workspace selector - commented out for now */}
-          {/* <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-md">
-            <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          {/* <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-gray-800/50 border border-gray-700 rounded-md">
+            <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
-            <span className="text-sm text-slate-300">Workspace: Acme Labs</span>
+            <span className="text-sm text-gray-300">Workspace: Acme Labs</span>
           </div> */}
         </div>
 
@@ -38,9 +38,29 @@ export default function TopBar() {
 
         {/* Right: Icons and User */}
         <div className="flex items-center gap-4">
+          {/* Knowledge Base Link */}
+          {session?.user && (
+            <Link
+              href="/knowledge-base"
+              className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-md transition-colors"
+            >
+              Knowledge Base
+            </Link>
+          )}
+
+          {/* E-Commerce Demo Link */}
+          {session?.user && (
+            <Link
+              href="/demo/e-commerce/explorer"
+              className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-md transition-colors"
+            >
+              E-Commerce Demo
+            </Link>
+          )}
+
           {/* Notifications - commented out for now */}
           {/* <button
-            className="p-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded-md transition-colors"
+            className="p-2 text-gray-400 hover:text-gray-200 hover:bg-gray-700/50 rounded-md transition-colors"
             aria-label="Notifications"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -50,7 +70,7 @@ export default function TopBar() {
 
           {/* Settings - commented out for now */}
           {/* <button
-            className="p-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded-md transition-colors"
+            className="p-2 text-gray-400 hover:text-gray-200 hover:bg-gray-700/50 rounded-md transition-colors"
             aria-label="Settings"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -59,29 +79,38 @@ export default function TopBar() {
             </svg>
           </button> */}
 
+          {!session?.user && (
+            <button
+              onClick={() => signIn('google', { callbackUrl: '/knowledge-base' })}
+              className="px-4 py-2 text-sm font-medium text-cyan-400 hover:text-cyan-300 hover:bg-gray-700/50 rounded-md transition-colors border border-cyan-400/30"
+            >
+              Login to Explore
+            </button>
+          )}
+
           {session?.user && (
             <div className="relative">
               <button
                 onClick={() => setShowUserMenu(!showUserMenu)}
-                className="flex items-center gap-2 p-1.5 hover:bg-slate-800 rounded-md transition-colors"
+                className="flex items-center gap-2 p-1.5 hover:bg-gray-700/50 rounded-md transition-colors"
               >
                 <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
                   {session.user.email?.[0].toUpperCase()}
                 </div>
-                <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
               {showUserMenu && (
-                <div className="absolute right-0 mt-2 w-56 bg-slate-900 border border-slate-700 rounded-lg shadow-xl py-1">
-                  <div className="px-4 py-3 border-b border-slate-700">
-                    <p className="text-sm text-slate-400">Signed in as</p>
+                <div className="absolute right-0 mt-2 w-56 bg-gray-800/50 border border-gray-700 rounded-lg shadow-xl py-1">
+                  <div className="px-4 py-3 border-b border-gray-700">
+                    <p className="text-sm text-gray-400">Signed in as</p>
                     <p className="text-sm font-medium text-white truncate">{session.user.email}</p>
                   </div>
                   <button
                     onClick={() => signOut()}
-                    className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 transition-colors"
+                    className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/50 transition-colors"
                   >
                     Sign out
                   </button>
@@ -102,7 +131,7 @@ function NavItem({ href, label, active = false }: { href: string; label: string;
       className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
         active
           ? 'text-cyan-400 bg-cyan-400/10'
-          : 'text-slate-300 hover:text-white hover:bg-slate-800'
+          : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
       }`}
     >
       {label}

@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "total_tweets": 1454,
+    "n_personas": 11,
+    "generation_timestamp": "2025-11-10T20:40:36.565750"
+  },
+  "persona_distribution": {
+    "0": {
+      "name": "Tech Builders",
+      "count": 339,
+      "percentage": 23.31
+    },
+    "1": {
+      "name": "UX Shoppers",
+      "count": 101,
+      "percentage": 6.95
+    },
+    "2": {
+      "name": "Delivery Trackers",
+      "count": 98,
+      "percentage": 6.74
+    },
+    "3": {
+      "name": "Return Scrutinizers",
+      "count": 79,
+      "percentage": 5.43
+    },
+    "4": {
+      "name": "India Watchers",
+      "count": 214,
+      "percentage": 14.72
+    },
+    "5": {
+      "name": "Counterfeit Warriors",
+      "count": 104,
+      "percentage": 7.15
+    },
+    "6": {
+      "name": "Platform Complainers",
+      "count": 39,
+      "percentage": 2.68
+    },
+    "7": {
+      "name": "Persona 7",
+      "count": 94,
+      "percentage": 6.46
+    },
+    "8": {
+      "name": "Persona 8",
+      "count": 93,
+      "percentage": 6.4
+    },
+    "9": {
+      "name": "Persona 9",
+      "count": 102,
+      "percentage": 7.02
+    },
+    "10": {
+      "name": "Persona 10",
+      "count": 191,
+      "percentage": 13.14
+    }
+  },
+  "noise_handling": {
+    "original_noise_count": 545,
+    "noise_ratio": 37.48,
+    "reassigned_to_nearest": 545,
+    "final_noise_count": 0
+  },
+  "quality_metrics": {
+    "coverage": "100%",
+    "assignment_method": "HDBSCAN + nearest-centroid for noise"
+  }
+}

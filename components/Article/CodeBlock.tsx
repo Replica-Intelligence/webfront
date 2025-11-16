@@ -20,13 +20,13 @@ export default function CodeBlock({ code, language, lineNumbers = true }: CodeBl
   return (
     <div className="relative group my-6">
       {/* Language tag and copy button */}
-      <div className="flex items-center justify-between px-4 py-2 bg-slate-900 border border-slate-800 border-b-0 rounded-t-lg">
-        <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">
+      <div className="flex items-center justify-between px-4 py-2 bg-gray-800/50 border border-slate-800 border-b-0 rounded-t-lg">
+        <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">
           {language}
         </span>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-2 px-3 py-1 text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition-colors"
+          className="flex items-center gap-2 px-3 py-1 text-xs bg-gray-800/50 hover:bg-slate-700 text-gray-300 rounded transition-colors"
         >
           {copied ? (
             <>
@@ -54,7 +54,7 @@ export default function CodeBlock({ code, language, lineNumbers = true }: CodeBl
       {/* Code content */}
       <div className="overflow-x-auto bg-slate-950 border border-slate-800 rounded-b-lg">
         <pre className="p-4 text-sm leading-relaxed">
-          <code className="text-slate-300 font-mono">
+          <code className="text-gray-300 font-mono">
             {lineNumbers ? (
               <div>
                 {code.split('\n').map((line, i) => (

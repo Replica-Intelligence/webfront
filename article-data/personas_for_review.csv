@@ -1,0 +1,12 @@
+id,name,size,peak_hour,avg_word_count,top_terms,copy_hint_1,copy_hint_2
+0,Tech Builders,337,15,30.8,"return, policy, new",Reference return and policy explicitly,Target business hours for maximum engagement
+1,UX Shoppers,100,15,89.4,"commerce, brands, india",Reference commerce and brands explicitly,Target business hours for maximum engagement
+2,Delivery Trackers,98,15,43.2,"order, delhi, alert",Reference order and delhi explicitly,Target business hours for maximum engagement
+3,Return Scrutinizers,80,15,25.6,"fake, products, genuine",Reference fake and products explicitly,Target business hours for maximum engagement
+4,India Watchers,213,15,39.0,"days, delivery, order",Reference days and delivery explicitly,Target business hours for maximum engagement
+5,Counterfeit Warriors,102,15,40.1,"delivery, product, customer",Reference delivery and product explicitly,Target business hours for maximum engagement
+6,Platform Complainers,38,15,30.6,"https, bhai, policy",Reference https and bhai explicitly,Target business hours for maximum engagement
+7,Payment Gateway Shoppers,95,15,31.3,"gateway, payment, payments",Reference gateway and payment explicitly,Target business hours for maximum engagement
+8,Trust-First Buyers,93,15,26.1,"trust, online, order",Reference trust and online explicitly,Target business hours for maximum engagement
+9,Customer Service Critics,104,15,31.6,"service, chat, customer",Reference service and chat explicitly,Target business hours for maximum engagement
+10,Conversational Commerce Users,194,15,26.4,"shopping, online, experience",Reference shopping and online explicitly,Target business hours for maximum engagement

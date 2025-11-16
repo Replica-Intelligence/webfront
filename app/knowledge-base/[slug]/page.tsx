@@ -1,5 +1,3 @@
-import { auth } from '@/auth';
-import { redirect } from 'next/navigation';
 import { adminDb } from '@/lib/firebase';
 import Link from 'next/link';
 import AppShell from '@/components/AppShell/AppShell';
@@ -8,6 +6,8 @@ import CodeBlock from '@/components/Article/CodeBlock';
 import Callout from '@/components/Article/Callout';
 import RelatedArticles from '@/components/Article/RelatedArticles';
 import ArticleFeedback from '@/components/Article/ArticleFeedback';
+import ViewTracker from '@/components/Article/ViewTracker';
+import ArticleClientWrapper from './ArticleClientWrapper';
 
 interface Article {
   id: string;
@@ -53,13 +53,50 @@ async function getArticle(slug: string): Promise<Article | null> {
   }
 }
 
-export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const session = await auth();
+interface RelatedArticle {
+  id: string;
+  title: string;
+  slug: string;
+  area?: string;
+}
 
-  if (!session?.user) {
-    redirect('/');
+async function getRelatedArticles(articleId: string): Promise<RelatedArticle[]> {
+  try {
+    const snapshot = await adminDb
+      .collection('relatedArticles')
+      .where('sourceArticleId', '==', articleId)
+      .get();
+
+    if (snapshot.empty) {
+      return [];
+    }
+
+    // Get all related article IDs
+    const relatedIds = snapshot.docs.map(doc => doc.data().relatedArticleId);
+
+    // Fetch the actual article details
+    const relatedArticles: RelatedArticle[] = [];
+    for (const relatedId of relatedIds) {
+      const articleDoc = await adminDb.collection('articles').doc(relatedId).get();
+      if (articleDoc.exists) {
+        const data = articleDoc.data();
+        relatedArticles.push({
+          id: articleDoc.id,
+          title: data?.title || '',
+          slug: data?.slug || '',
+          area: data?.area,
+        });
+      }
+    }
+
+    return relatedArticles;
+  } catch (error) {
+    console.error('Error fetching related articles:', error);
+    return [];
   }
+}
 
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const article = await getArticle(slug);
 
@@ -78,10 +115,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
                 Article Coming Soon
               </h1>
-              <p className="text-lg text-slate-400 mb-2">
+              <p className="text-lg text-gray-400 mb-2">
                 This article is currently being prepared or the URL might be incorrect.
               </p>
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-gray-500">
                 Check back later or browse our other articles.
               </p>
             </div>
@@ -98,15 +135,15 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               </Link>
               <Link
                 href="/"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium rounded-lg transition-colors border border-slate-700"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-700/50 hover:bg-slate-700 text-gray-300 font-medium rounded-lg transition-colors border border-gray-700"
               >
                 Go to Home
               </Link>
             </div>
 
-            <div className="mt-12 p-6 bg-slate-900/50 border border-slate-800 rounded-lg text-left">
-              <h2 className="text-sm font-semibold text-slate-300 mb-2">Looking for this specific article?</h2>
-              <p className="text-sm text-slate-400">
+            <div className="mt-12 p-6 bg-gray-800/50/50 border border-gray-700/50 rounded-lg text-left">
+              <h2 className="text-sm font-semibold text-gray-300 mb-2">Looking for this specific article?</h2>
+              <p className="text-sm text-gray-400">
                 If you believe this article should exist, please check the URL for typos or contact the administrator.
               </p>
             </div>
@@ -129,32 +166,20 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     { id: 'considerations', title: 'RI-specific considerations' },
   ];
 
-  const relatedArticles = [
-    {
-      id: '1',
-      title: 'Prerequisite: Intro to Embeddings',
-      slug: 'intro-to-embeddings',
-      badge: 'Prerequisite' as const,
-      area: 'Models & Embeddings',
-    },
-    {
-      id: '2',
-      title: 'Next: Serving RI Personas in Production',
-      slug: 'serving-personas',
-      badge: 'Follow-up' as const,
-      area: 'Deployment & Monitoring',
-    },
-  ];
+  // Fetch related articles from Firestore
+  const relatedArticles = await getRelatedArticles(article.id);
 
   return (
     <AppShell showLeftNav={false}>
-      <div className="min-h-screen">
+      <ArticleClientWrapper>
+        <ViewTracker slug={slug} />
+        <div className="min-h-screen">
         {/* Back Navigation and Breadcrumbs */}
-        <div className="border-b border-slate-800 bg-slate-900/50">
+        <div className="border-b border-gray-700/50 bg-gray-800/50/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <Link
               href="/knowledge-base"
-              className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-cyan-400 transition-colors mb-3"
+              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors mb-3"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -163,7 +188,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             </Link>
 
             {/* Breadcrumbs */}
-            {/* <nav className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 flex-wrap">
+            {/* <nav className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 flex-wrap">
               <Link href="/knowledge-base" className="hover:text-cyan-400 transition-colors">
                 RI Knowledge Base
               </Link>
@@ -174,7 +199,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-              <span className="text-slate-400">{article.title}</span>
+              <span className="text-gray-400">{article.title}</span>
             </nav> */}
           </div>
         </div>
@@ -201,7 +226,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   </h1>
 
                   {article.subtitle && (
-                    <p className="text-lg sm:text-xl text-slate-300 mb-6">
+                    <p className="text-lg sm:text-xl text-gray-300 mb-6">
                       {article.subtitle}
                     </p>
                   )}
@@ -218,21 +243,21 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                       </span>
                     )}
                     {article.badge && (
-                      <span className="inline-flex items-center px-3 py-1 text-xs sm:text-sm bg-slate-800 text-slate-300 rounded-md border border-slate-700">
+                      <span className="inline-flex items-center px-3 py-1 text-xs sm:text-sm bg-gray-700/50 text-gray-300 rounded-md border border-gray-700">
                         {article.badge}
                       </span>
                     )}
                     {article.readTime && (
-                      <span className="text-xs sm:text-sm text-slate-400">{article.readTime} read</span>
+                      <span className="text-xs sm:text-sm text-gray-400">{article.readTime} read</span>
                     )}
-                    <span className="text-xs sm:text-sm text-slate-400">Published {article.date}</span>
+                    <span className="text-xs sm:text-sm text-gray-400">Published {article.date}</span>
                     {article.updatedDate && (
-                      <span className="text-xs sm:text-sm text-slate-400">Updated {article.updatedDate}</span>
+                      <span className="text-xs sm:text-sm text-gray-400">Updated {article.updatedDate}</span>
                     )}
                   </div> */}
 
                   {/* Author and stats */}
-                  <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-800">
+                  <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-gray-700/50">
                     {article.author && (
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-medium">
@@ -241,14 +266,14 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                         <div>
                           <div className="font-medium text-white text-sm sm:text-base">{article.author.name}</div>
                           {article.author.role && (
-                            <div className="text-xs sm:text-sm text-slate-400">{article.author.role}</div>
+                            <div className="text-xs sm:text-sm text-gray-400">{article.author.role}</div>
                           )}
                         </div>
                       </div>
                     )}
 
                     {(article.views || article.rating) && (
-                      <div className="flex items-center gap-4 text-xs sm:text-sm text-slate-400">
+                      <div className="flex items-center gap-4 text-xs sm:text-sm text-gray-400">
                         {article.views && <span>{article.views.toLocaleString()} views</span>}
                         {article.rating && (
                           <span className="flex items-center gap-1">
@@ -269,7 +294,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   {/* Example content with our components */}
                   <section id="overview" className="mb-12">
                     <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Overview</h2>
-                    <div className="text-slate-300 leading-relaxed space-y-4">
+                    <div className="text-gray-300 leading-relaxed space-y-4">
                       <div dangerouslySetInnerHTML={{ __html: article.content }} />
                     </div>
                   </section>
@@ -313,6 +338,7 @@ print(f"Shape: {embeddings.shape}")`}
           </div>
         </div>
       </div>
+      </ArticleClientWrapper>
     </AppShell>
   );
 }

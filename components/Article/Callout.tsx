@@ -52,7 +52,7 @@ export default function Callout({ type, title, children }: CalloutProps) {
               {title || config.defaultTitle}
             </h4>
           )}
-          <div className="text-sm sm:text-base text-slate-300 leading-relaxed">
+          <div className="text-sm sm:text-base text-gray-300 leading-relaxed">
             {children}
           </div>
         </div>

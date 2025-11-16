@@ -1,0 +1,242 @@
+{
+  "metadata": {
+    "total_personas": 11,
+    "total_tweets": 1454,
+    "version": "1.0"
+  },
+  "personas": [
+    {
+      "id": 0,
+      "name": "Tech Builders",
+      "description": "Payment gateway developers and security researchers focused on technical infrastructure",
+      "size": 337,
+      "top_terms": [
+        "return",
+        "policy",
+        "new",
+        "days",
+        "items"
+      ],
+      "peak_hour": 15,
+      "copy_hints": {
+        "do_say": [
+          "Reference return and policy explicitly",
+          "Target business hours for maximum engagement"
+        ],
+        "dont_say": []
+      }
+    },
+    {
+      "id": 1,
+      "name": "UX Shoppers",
+      "description": "Design-aware consumers who value seamless online shopping experiences and beautiful UX",
+      "size": 100,
+      "top_terms": [
+        "commerce",
+        "brands",
+        "india",
+        "quick",
+        "like"
+      ],
+      "peak_hour": 15,
+      "copy_hints": {
+        "do_say": [
+          "Reference commerce and brands explicitly",
+          "Target business hours for maximum engagement"
+        ],
+        "dont_say": []
+      }
+    },
+    {
+      "id": 2,
+      "name": "Delivery Trackers",
+      "description": "Anxious package trackers obsessed with delivery timelines and shipping transparency",
+      "size": 98,
+      "top_terms": [
+        "order",
+        "delhi",
+        "alert",
+        "issues",
+        "online"
+      ],
+      "peak_hour": 15,
+      "copy_hints": {
+        "do_say": [
+          "Reference order and delhi explicitly",
+          "Target business hours for maximum engagement"
+        ],
+        "dont_say": []
+      }
+    },
+    {
+      "id": 3,
+      "name": "Return Scrutinizers",
+      "description": "Rights-aware consumers who scrutinize return policies and demand clear refund terms",
+      "size": 80,
+      "top_terms": [
+        "fake",
+        "products",
+        "genuine",
+        "myntra",
+        "amazonin"
+      ],
+      "peak_hour": 15,
+      "copy_hints": {
+        "do_say": [
+          "Reference fake and products explicitly",
+          "Target business hours for maximum engagement"
+        ],
+        "dont_say": [
+          "Avoid excessive exclamation marks"
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "name": "India Watchers",
+      "description": "India-focused e-commerce watchers tracking market dynamics and quick commerce trends",
+      "size": 213,
+      "top_terms": [
+        "days",
+        "delivery",
+        "order",
+        "orders",
+        "product"
+      ],
+      "peak_hour": 15,
+      "copy_hints": {
+        "do_say": [
+          "Reference days and delivery explicitly",
+          "Target business hours for maximum engagement"
+        ],
+        "dont_say": []
+      }
+    },
+    {
+      "id": 5,
+      "name": "Counterfeit Warriors",
+      "description": "Brand-conscious consumers wary of counterfeit products and demanding authenticity",
+      "size": 102,
+      "top_terms": [
+        "delivery",
+        "product",
+        "customer",
+        "issues",
+        "service"
+      ],
+      "peak_hour": 15,
+      "copy_hints": {
+        "do_say": [
+          "Reference delivery and product explicitly",
+          "Target business hours for maximum engagement"
+        ],
+        "dont_say": []
+      }
+    },
+    {
+      "id": 6,
+      "name": "Platform Complainers",
+      "description": "Frustrated customers who publicly complain about platform issues and warn about scams",
+      "size": 38,
+      "top_terms": [
+        "https",
+        "bhai",
+        "policy",
+        "return",
+        "na"
+      ],
+      "peak_hour": 15,
+      "copy_hints": {
+        "do_say": [
+          "Reference https and bhai explicitly",
+          "Target business hours for maximum engagement"
+        ],
+        "dont_say": []
+      }
+    },
+    {
+      "id": 7,
+      "name": "Payment Gateway Shoppers",
+      "description": "Comparison shoppers evaluating payment gateways and fintech solutions for transactions",
+      "size": 95,
+      "top_terms": [
+        "gateway",
+        "payment",
+        "payments",
+        "digital",
+        "paypal"
+      ],
+      "peak_hour": 15,
+      "copy_hints": {
+        "do_say": [
+          "Reference gateway and payment explicitly",
+          "Target business hours for maximum engagement"
+        ],
+        "dont_say": []
+      }
+    },
+    {
+      "id": 8,
+      "name": "Trust-First Buyers",
+      "description": "Security-conscious buyers prioritizing trust, authenticity, and verified sellers",
+      "size": 93,
+      "top_terms": [
+        "trust",
+        "online",
+        "order",
+        "product",
+        "customer"
+      ],
+      "peak_hour": 15,
+      "copy_hints": {
+        "do_say": [
+          "Reference trust and online explicitly",
+          "Target business hours for maximum engagement"
+        ],
+        "dont_say": []
+      }
+    },
+    {
+      "id": 9,
+      "name": "Customer Service Critics",
+      "description": "Vocal critics of customer service quality, especially automated chatbots and support systems",
+      "size": 104,
+      "top_terms": [
+        "service",
+        "chat",
+        "customer",
+        "ai",
+        "voice"
+      ],
+      "peak_hour": 15,
+      "copy_hints": {
+        "do_say": [
+          "Reference service and chat explicitly",
+          "Target business hours for maximum engagement"
+        ],
+        "dont_say": []
+      }
+    },
+    {
+      "id": 10,
+      "name": "Conversational Commerce Users",
+      "description": "Tech-savvy shoppers interested in AI-driven commerce and conversational shopping experiences",
+      "size": 194,
+      "top_terms": [
+        "shopping",
+        "online",
+        "experience",
+        "ai",
+        "like"
+      ],
+      "peak_hour": 15,
+      "copy_hints": {
+        "do_say": [
+          "Reference shopping and online explicitly",
+          "Target business hours for maximum engagement"
+        ],
+        "dont_say": []
+      }
+    }
+  ]
+}
