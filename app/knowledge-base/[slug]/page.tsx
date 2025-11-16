@@ -173,7 +173,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <AppShell showLeftNav={false}>
       <ArticleClientWrapper>
         <ViewTracker slug={slug} />
-        <div className="min-h-screen">
+        <div className="min-h-screen article-page">
         {/* Back Navigation and Breadcrumbs */}
         <div className="border-b border-gray-700/50 bg-gray-800/50/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -205,8 +205,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
 
         {/* Article Content */}
-        <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-          <div className="max-w-4xl mx-auto">
+        <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 overflow-x-hidden">
+          <div className="max-w-4xl mx-auto overflow-x-hidden">
             {/* Main Content */}
             <article>
                 {/* Article Header */}
@@ -290,11 +290,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 </header>
 
                 {/* Article Body */}
-                <div className="prose prose-invert prose-slate max-w-none">
+                <div className="prose prose-invert prose-slate max-w-none prose-headings:scroll-mt-20 prose-pre:max-w-full prose-pre:overflow-x-auto prose-table:block prose-table:overflow-x-auto prose-img:rounded-lg">
                   {/* Example content with our components */}
                   <section id="overview" className="mb-12">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Overview</h2>
-                    <div className="text-gray-300 leading-relaxed space-y-4">
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4">Overview</h2>
+                    <div className="text-gray-300 leading-relaxed space-y-4 text-sm sm:text-base">
                       <div dangerouslySetInnerHTML={{ __html: article.content }} />
                     </div>
                   </section>
@@ -305,7 +305,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   </Callout>
 
                   <section id="implementation" className="mb-12">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Implementation</h2>
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4">Implementation</h2>
                     <CodeBlock
                       language="Python"
                       code={`import numpy as np
