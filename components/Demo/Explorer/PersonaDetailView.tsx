@@ -34,6 +34,10 @@ const PersonaDetailView: React.FC<PersonaDetailViewProps> = ({ persona }) => {
     router.push('/demo/e-commerce/explorer');
   };
 
+  // Calculate percentage based on total dataset size (1454 from paper)
+  const totalDatasetSize = 1454;
+  const percentage = ((persona.size / totalDatasetSize) * 100).toFixed(1);
+
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <button onClick={handleBack} className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-8 group">
@@ -47,7 +51,7 @@ const PersonaDetailView: React.FC<PersonaDetailViewProps> = ({ persona }) => {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          <StatCard title="Audience Size" value={persona.size} icon={<UserGroupIcon className="w-6 h-6 text-cyan-400" />} />
+          <StatCard title="Audience Size" value={`${percentage}%`} icon={<UserGroupIcon className="w-6 h-6 text-cyan-400" />} />
           <StatCard title="Peak Activity" value={`${behavior_fingerprint.temporal.peak_hour}:00`} icon={<ClockIcon className="w-6 h-6 text-cyan-400" />} />
           <StatCard title="Avg. Word Count" value={behavior_fingerprint.style.avg_word_count.toFixed(1)} icon={<Bars3BottomLeftIcon className="w-6 h-6 text-cyan-400" />} />
       </div>

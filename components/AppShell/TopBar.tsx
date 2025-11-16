@@ -48,13 +48,13 @@ export default function TopBar() {
             </Link>
           )}
 
-          {/* E-Commerce Demo Link */}
+          {/* E-Commerce Use case Link */}
           {session?.user && (
             <Link
               href="/demo/e-commerce/explorer"
               className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-md transition-colors"
             >
-              E-Commerce Demo
+              E-Commerce Use Case
             </Link>
           )}
 
